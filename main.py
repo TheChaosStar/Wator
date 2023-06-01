@@ -3,35 +3,27 @@ from Plateau import Plateau
 import os, time
 clear = lambda: os.system('clear')
 
-SIZE = 5
+SIZE = 2
 
 
 plateau = Plateau(SIZE)
 
-#plateau.addEntity(Requin(SIZE))
-#plateau.addEntity(Requin(SIZE))
-#plateau.addEntity(Requin(SIZE))
 plateau.addEntity(Poisson(SIZE))
 plateau.addEntity(Requin(SIZE))
 
-plateau.update()
-print(plateau)
-
-plateau.update()
-print(plateau)
-
-plateau.update()
-print(plateau)
+frame = 1
 
 # loop
-# while (True):
+while (plateau.isRunning()):
+    print(f"[{frame}]")
 
-#     plateau.update()
-#     print(plateau)
+    plateau.update()
+    plateau.render()
 
-#     time.sleep(1)
+    time.sleep(.25)
     
-#     clear()
+    clear()
+    frame += 1
 
 
 
