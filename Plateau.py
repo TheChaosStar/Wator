@@ -32,5 +32,7 @@ class Plateau :
                     if isinstance(e, Poisson): self.removeEntity(e)
                     if isinstance(e2, Poisson): self.removeEntity(e)
 
+            print(e)
+
             self.plateau[e.getX()][e.getY()] = e.getChar() + " "
-            e.move(self.entities)
+            e.move(self.size, self.entities)

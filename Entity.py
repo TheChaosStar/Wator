@@ -7,7 +7,7 @@ class Entity:
         self.y = y
         self.char = char
         self.breadingCount = breadingCount
-    def __str__(self): return f"Char:{self.char}"
+    def __str__(self): return f"X:{self.x} | Y:{self.y} | Char:{self.char}"
 
     def getX(self): return self.x
     def getY(self): return self.y
@@ -29,7 +29,20 @@ class Entity:
                 entities_in_range.append(e)
 
         return entities_in_range
-
+    def move(self):
+        randPos = randint(0, 3)
+        if randPos == 0:
+            if self.x - 1 < 0: self.x = plateau_size - 1
+            else: self.x -= 1 
+        if randPos == 1:
+            if self.x + 1 > plateau_size - 1: self.x = 0
+            else: self.x += 1 
+        if randPos == 2:
+            if self.y - 1 < 0: self.y = plateau_size - 1
+            else: self.y -= 1 
+        if randPos == 3:
+            if self.y + 1 > plateau_size - 1: self.y = 0
+            else: self.y += 1 
 
 # --------------------------------------------------------------------
 
@@ -64,8 +77,8 @@ class Poisson (Entity):
 class Requin (Entity):
     def __init__(self, size):
         super().__init__(
-            randint(0, size),
-            randint(0, size),
+            randint(0, size - 1),
+            randint(0, size - 1),
             "🦈", 0
         )
         self.power = 5
@@ -77,17 +90,8 @@ class Requin (Entity):
                 self.x = e.x
                 self.y = e.y
                 return
+            
+        super().move()
+
+
         
-        randPos = randint(0, 3)
-        if randPos == 0:
-            if self.x - 1 < 0: self.x = plateau_size
-            else: self.x -= 1 
-        if randPos == 1:
-            if self.x + 1 > plateau_size: self.x = plateau_size
-            else: self.x += 1 
-        if randPos == 2:
-            if self.x - 1 > 0: self.x = plateau_size
-            else: self.y -= 1 
-        if randPos == 3:
-            if self.x - 1 > 0: self.x = plateau_size
-            else: self.y += 1 
